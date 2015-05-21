@@ -3,24 +3,24 @@
 	left: "0",
 	width: "250",
 	zIndex: "2",
-	backgroundColor : "#777777"
+	backgroundColor : "#48515F"
 },
 "#rightMenu": {
 	top: "10%",
 	right: "0",
 	width: "250",
 	zIndex: "1",
-	backgroundColor : "#777777"
+	backgroundColor : "#48515F"
 },
 "#leftTableView": {
 	top: "1%",
 	width : "100%",
-	backgroundColor : "#777777"
+	backgroundColor : "#48515F"
 },
 "#rightTableView": {
 	top: "1%",
 	width : "100%",
-	backgroundColor : "#777777"
+	backgroundColor : "#48515F"
 },
 "#navview": {
 	top: "0",
@@ -63,4 +63,6 @@
 	top : "0",
 	style : "none",
 	title : "Menu2"
-}
+},
+".win": {},
+"#containerview": {}

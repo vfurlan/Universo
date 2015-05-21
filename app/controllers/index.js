@@ -213,11 +213,11 @@ exports.handleRotation = function() {
 var leftData = [];
 var rightData = [];
 
-var row = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#595959"});
+var row = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#3D4654",leftImage:"/bookmark-128.png",left:"5%"});
 row.title="Contatti";
 row.className="contatti";
 
-var row2 = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#595959"});
+var row2 = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#3D4654",leftImage:"/bookmark-128.png",left:"5%"});
 row2.title="Dove siamo";
 row2.className="dove_siamo";
 
