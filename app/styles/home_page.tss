@@ -1,2 +1,32 @@
 
-"#home_page": {}
+"#homePage": {
+	width: "94%",
+	height: Ti.UI.FILL
+}
+
+"#homePageContent": {
+	width: "94%"
+}
+
+"#titleContainer":{}
+
+"#titleLabel":{
+	color: '#900',
+	font: { fontSize:40 },
+	shadowColor: '#aaa',
+	shadowOffset: {x:5, y:5},
+	shadowRadius: 3,
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	top:10
+}
+
+"#textContainer":{
+	backgroundColor: "#EAEFF2",
+	top:"60"
+}
+
+"#textLabel":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	width: "94%"
+}

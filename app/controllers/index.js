@@ -214,15 +214,20 @@ var leftData = [];
 var rightData = [];
 
 var row = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#3D4654",leftImage:"/bookmark-128.png",left:"5%"});
-row.title="Contatti";
-row.className="contatti";
+row.title="Home Page";
+row.className="home_page";
 
 var row2 = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#3D4654",leftImage:"/bookmark-128.png",left:"5%"});
-row2.title="Dove siamo";
-row2.className="dove_siamo";
+row2.title="Contatti";
+row2.className="contatti";
+
+var row3 = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#3D4654",leftImage:"/bookmark-128.png",left:"5%"});
+row3.title="Dove siamo";
+row3.className="dove_siamo";
 
 leftData.push(row);
 leftData.push(row2);
+leftData.push(row3);
 
 // Pass data to widget leftTableView and rightTableView
 $.leftTableView.data = leftData;
@@ -236,7 +241,7 @@ function rowSelect(e) {
 	}
 }
 
-var currentView = Alloy.createController("contatti").getView();
+var currentView = Alloy.createController("home_page").getView();
 $.contentview.add(currentView);
 
 // Swap views on menu item click
