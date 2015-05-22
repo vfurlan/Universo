@@ -1,14 +1,14 @@
 "#leftMenu": {
 	top: "10%",
 	left: "0",
-	width: "250",
+	width: "70%",
 	zIndex: "2",
 	backgroundColor : "#48515F"
 },
 "#rightMenu": {
 	top: "10%",
 	right: "0",
-	width: "250",
+	width: "70%",
 	zIndex: "1",
 	backgroundColor : "#48515F"
 },

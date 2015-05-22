@@ -1,20 +1,38 @@
 
+function pixelsToDp(pixels){
+    if ( Ti.Platform.displayCaps.dpi > 160 )
+        return (pixels / (Ti.Platform.displayCaps.dpi / 160));
+    else 
+        return pixels;
+}
+
+function dpToPixels(dp){
+    if ( Ti.Platform.displayCaps.dpi > 160 )
+          return (dp * (Ti.Platform.displayCaps.dpi / 160));
+    else 
+        return dp;
+}
+
+var dimMenu=Ti.Platform.displayCaps.dpi*0.7;
+var dimHalfMenu=dimMenu/2;
+var minDimMenu=Ti.Platform.displayCaps.dpi*0.1;
+
 var animateRight = Ti.UI.createAnimation({
-	left : 250,
+	left : dimMenu,
 	curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
-	duration : 150
+	duration : 300
 });
 
 var animateReset = Ti.UI.createAnimation({
 	left : 0,
 	curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
-	duration : 150
+	duration : 300
 });
 
 var animateLeft = Ti.UI.createAnimation({
-	left : -250,
+	left : -dimMenu,
 	curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
-	duration : 150
+	duration : 300
 });
 
 var touchStartX = 0;
@@ -25,7 +43,12 @@ var hasSlided = false;
 var direction = "reset";
 
 $.movableview.addEventListener('touchstart', function(e) {
-	touchStartX = e.x;
+	if (Ti.Platform.osname === 'android'){
+		touchStartX = pixelsToDp(e.x);
+	}
+	else{
+		touchStartX = e.x;
+	}
 });
 
 $.movableview.addEventListener('touchend', function(e) {
@@ -33,21 +56,17 @@ $.movableview.addEventListener('touchend', function(e) {
 		buttonPressed = false;
 		return;
 	}
-	if ($.movableview.left >= 150 && touchRightStarted) {
+	if ($.movableview.left >= dimHalfMenu && touchRightStarted) {
 		direction = "right";
-		//$.leftButton.touchEnabled = false;
 		$.movableview.animate(animateRight);
 		hasSlided = true;
 	}
-	else if ($.movableview.left <= -150 && touchLeftStarted) {
+	else if ($.movableview.left <= -dimHalfMenu && touchLeftStarted) {
 		direction = "left";
-		//$.rightButton.touchEnabled = false;
 		$.movableview.animate(animateLeft);
 		hasSlided = true;
 	} else {
 		direction = "reset";
-		//$.leftButton.touchEnabled = true;
-		//$.rightButton.touchEnabled = true;
 		$.movableview.animate(animateReset);
 		hasSlided = false;
 	}
@@ -64,39 +83,79 @@ $.movableview.addEventListener('touchmove', function(e) {
 		x : e.x,
 		y : e.y
 	}, $.containerview);
-	var newLeft = coords.x - touchStartX;
-	if ((touchRightStarted && newLeft <= 250 && newLeft >= 0) || 
-		(touchLeftStarted && newLeft <= 0 && newLeft >= -250)) {
-		$.movableview.left = newLeft;
+	var newLeft;
+	if (Ti.Platform.osname === 'android'){
+		newLeft = pixelsToDp(coords.x) - touchStartX;
 	}
-	else {
-		// Sometimes newLeft goes beyond its bounds so the view gets stuck.
-		// This is a hack to fix that.
-		if ((touchRightStarted && newLeft < 0) || (touchLeftStarted && newLeft > 0)) {
-			$.movableview.left = 0;
+	else{
+		newLeft = coords.x - touchStartX;
+	}
+	if(touchStartX<minDimMenu){
+		if ((newLeft <= dimMenu && newLeft > 0) || 
+			(newLeft < 0 && newLeft >= -dimMenu)) {
+			$.movableview.left = newLeft;
+		
+			if (newLeft > 0 && !touchLeftStarted && !touchRightStarted) {
+				touchRightStarted = true;
+				Ti.App.fireEvent("sliderToggled", {
+					hasSlided : false,
+					direction : "right"
+				});
+			}
+			else if (newLeft < 0 && !touchRightStarted && !touchLeftStarted) {
+				touchLeftStarted = true;
+				Ti.App.fireEvent("sliderToggled", {
+					hasSlided : false,
+					direction : "left"
+				});
+			}
 		}
-		else if (touchRightStarted && newLeft > 250) {
-			$.movableview.left = 250;
-		}
-		else if (touchLeftStarted && newLeft < -250) {
-			$.movableview.left = -250;
-		}
 	}
-	if (newLeft > 5 && !touchLeftStarted && !touchRightStarted) {
-		touchRightStarted = true;
-		Ti.App.fireEvent("sliderToggled", {
-			hasSlided : false,
-			direction : "right"
-		});
-	}
-	else if (newLeft < -5 && !touchRightStarted && !touchLeftStarted) {
-		touchLeftStarted = true;
-		Ti.App.fireEvent("sliderToggled", {
-			hasSlided : false,
-			direction : "left"
-		});
-	}
+	
 });
+
+/*
+$.movableview.addEventListener('touchmove', function(e) {
+	var coords = $.movableview.convertPointToView({
+		x : e.x,
+		y : e.y
+	}, $.containerview);
+	var newLeft = coords.x - touchStartX;
+	if(touchStartX<50){
+		if ((touchRightStarted && newLeft <= dimMenu && newLeft >= 0) || 
+			(touchLeftStarted && newLeft <= 0 && newLeft >= -dimMenu)) {
+			$.movableview.left = newLeft;
+		}
+		else {
+			// Sometimes newLeft goes beyond its bounds so the view gets stuck.
+			// This is a hack to fix that.
+			if ((touchRightStarted && newLeft < 0) || (touchLeftStarted && newLeft > 0)) {
+				$.movableview.left = 0;
+			}
+			else if (touchRightStarted && newLeft > dimMenu) {
+				$.movableview.left = dimMenu;
+			}
+			else if (touchLeftStarted && newLeft < -dimMenu) {
+				$.movableview.left = -dimMenu;
+			}
+		}
+		if (newLeft > 5 && !touchLeftStarted && !touchRightStarted) {
+			touchRightStarted = true;
+			Ti.App.fireEvent("sliderToggled", {
+				hasSlided : false,
+				direction : "right"
+			});
+		}
+		else if (newLeft < -5 && !touchRightStarted && !touchLeftStarted) {
+			touchLeftStarted = true;
+			Ti.App.fireEvent("sliderToggled", {
+				hasSlided : false,
+				direction : "left"
+			});
+		}
+	}
+	
+});*/
 
 $.leftButton.addEventListener('touchend', function(e) {
 	if (!touchRightStarted && !touchLeftStarted) {
@@ -139,12 +198,10 @@ $.rightButton.addEventListener('touchend', function(e) {
 exports.toggleLeftSlider = function() {
 	if (!hasSlided) {
 		direction = "right";
-		//$.leftButton.touchEnabled = false;
 		$.movableview.animate(animateRight);
 		hasSlided = true;
 	} else {
 		direction = "reset";
-		//$.leftButton.touchEnabled = true;
 		$.movableview.animate(animateReset);
 		hasSlided = false;
 	}
@@ -157,12 +214,10 @@ exports.toggleLeftSlider = function() {
 exports.toggleRightSlider = function() {
 	if (!hasSlided) {
 		direction = "left";
-		//$.rightButton.touchEnabled = false;
 		$.movableview.animate(animateLeft);
 		hasSlided = true;
 	} else {
 		direction = "reset";
-		//$.rightButton.touchEnabled = true;
 		$.movableview.animate(animateReset);
 		hasSlided = false;
 	}
@@ -248,10 +303,12 @@ $.contentview.add(currentView);
 $.leftTableView.addEventListener('click', function selectRow(e) {
 	rowSelect(e);
 	$.toggleLeftSlider();
+	buttonPressed=false;
 });
 $.rightTableView.addEventListener('click', function selectRow(e) {
 	rowSelect(e);
 	$.toggleRightSlider();
+	buttonPressed=false;
 });
 
 
@@ -272,4 +329,3 @@ if (Ti.Platform.osname === 'iphone')
 	});
 else
 	$.index.open();
-	
