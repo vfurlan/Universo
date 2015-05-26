@@ -294,7 +294,7 @@ $.contentview.add(currentView);
 
 
 
-var utenti = Alloy.createCollection("utente");
+var utenti = Alloy.Collections.instance("utente");
 utenti.fetch();
 
 var url= "http://valente666.altervista.com/web_service.php";

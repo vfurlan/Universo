@@ -35,3 +35,10 @@
 	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
 	width: "94%"
 }
+
+".button":{
+	backgroundColor: "#48515F",
+	top: 10,
+	width: "70%",
+	height: "10%"
+}
