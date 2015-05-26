@@ -255,8 +255,6 @@ function rowSelect(e) {
 
 
 
-
-
 //creazione del menu
 var leftData = [];
 var rightData = [];
@@ -284,6 +282,87 @@ $.rightTableView.data = rightData;
 //apertura della vista 'nome_page' e impostazione come vista corrente
 var currentView = Alloy.createController("home_page").getView();
 $.contentview.add(currentView);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var utenti = Alloy.createCollection("utente");
+utenti.fetch();
+
+var url= "http://valente666.altervista.com/web_service.php";
+
+function cancellaDB() {
+	while(utenti.length) { 
+	    utenti.at(0).destroy(); 
+	}
+}
+
+var client = Ti.Network.createHTTPClient({
+     // function called when the response data is available
+     onload : function(e) {
+		Ti.API.info("Received text: " + this.responseText);
+		
+		cancellaDB();
+		
+		myData = JSON.parse(this.responseText);
+		for(var i=0; i<myData.utenti.length;i++){
+			// Crea un modello di tipo 'book'
+			var model = Alloy.createModel('utente', {
+				anno: myData.utenti[i].anno,
+			    relatore: myData.utenti[i].relatore,
+			    cv: myData.utenti[i].cv,
+			    abstract: myData.utenti[i].abstract,
+			    serata: myData.utenti[i].serata,
+			    titolo_abstract: myData.utenti[i].titolo_abstract,
+			    orario: myData.utenti[i].orario,
+			    video: myData.utenti[i].video,
+			    pdf: myData.utenti[i].pdf,
+			    youtube: myData.utenti[i].youtube
+			});
+		
+			// aggiungi un modello alla collezione
+			utenti.add(model);
+		
+			// salva il modello
+			model.save();
+		}
+		alert("database caricato!");
+     },
+     // function called when an error occurs, including a timeout
+     onerror : function(e) {
+         Ti.API.debug(e.error);
+         alert('error');
+     },
+     timeout : 5000  // in milliseconds
+ });
+
+// Prepare the connection.
+client.open("GET", url);
+// Send the request.
+client.send();
+
+//test
+//var utente = utenti.at(0);
+//alert(utente.get("anno"));
+
+
+
+
+
 
 
 //apertura  dell'applicazione
