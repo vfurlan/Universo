@@ -1,0 +1,6 @@
+<Alloy>
+	<ScrollView id="edizioniPrecedenti">
+		<View id="edizioniPrecedentiContent">
+		</View>
+	</ScrollView>
+</Alloy>
