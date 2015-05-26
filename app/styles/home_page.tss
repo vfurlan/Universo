@@ -5,10 +5,14 @@
 }
 
 "#homePageContent": {
-	width: "94%"
+	layout: "vertical"
 }
 
-"#titleContainer":{}
+"#imageView":{
+	image: "/venerdibanner_2015.png",
+	height: "13%",
+	top: 10
+}
 
 "#titleLabel":{
 	color: '#900',
@@ -17,12 +21,13 @@
 	shadowOffset: {x:5, y:5},
 	shadowRadius: 3,
 	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-	top:10
+	top: 10
 }
 
-"#textContainer":{
+".textContainer":{
 	backgroundColor: "#EAEFF2",
-	top:"60"
+	top: 5,
+	width: "100%"
 }
 
 "#textLabel":{

@@ -1,12 +1,9 @@
 <Alloy>
 	<ScrollView id="homePage">
 		<View id="homePageContent">
-			<View id="titleContainer">
-				<Label id="titleLabel"></Label>
-			</View>
-			<View id="textContainer">
-				<Label id="textLabel"></Label>
-			</View>
+			<ImageView id="imageView"></ImageView>
+			<Label id="titleLabel"></Label>
+			<Label id="textLabel" class="textContainer"></Label>
 		</View>
 	</ScrollView>
 </Alloy>
