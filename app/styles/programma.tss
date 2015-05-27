@@ -1,11 +1,10 @@
 
-"#programma": {
-	width: "94%",
-	height: Ti.UI.FILL
-}
-
 "#programmaContent": {
-	layout: "vertical"
+	width: "94%",
+	showVerticalScrollIndicator: true,
+	height: Ti.UI.FILL,
+	layout: "vertical",
+	bottom: 10
 }
 
 "#imageView":{
@@ -32,7 +31,8 @@
 
 "#textLabel":{
 	color: '#000',
-	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	top: 10,
 	width: "94%"
 }
 
