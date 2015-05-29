@@ -1,0 +1,6 @@
+<Alloy>
+	<ScrollView id="eventoContent">
+		<View id="fotoView"></View>
+		<Label id="textLabel"></Label>
+	</ScrollView>
+</Alloy>
