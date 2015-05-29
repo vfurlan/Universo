@@ -218,6 +218,11 @@ $.rightTableView.addEventListener('click', function selectRow(e) {
 	buttonPressed=false;
 });
 
+// Visualizza la vista selezionata nel menu di sinistra
+Ti.App.addEventListener('changeView', function selectRow(e) {
+	rowSelect(e);
+});
+
 //imposta quale menu viene visualizzato e quale nascosto sotto
 Ti.App.addEventListener("sliderToggled", function(e) {
 	if (e.direction == "right") {
@@ -233,7 +238,7 @@ Ti.App.addEventListener("sliderToggled", function(e) {
 function rowSelect(e) {
 	if (currentView.id != e.row.customView) {
 		$.contentview.remove(currentView);
-		currentView = Alloy.createController(e.row.className).getView();
+		currentView = Alloy.createController(e.row.className,e.row.idRelatore).getView();
 		$.contentview.add(currentView);
 	}
 }
