@@ -13,6 +13,26 @@
 	height: Ti.UI.SIZE
 }
 
+".youtubeView":{
+	layout: "vertical",
+	width: "100%",
+	height: Ti.UI.SIZE
+}
+
+"#textCvLabel":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	top: 10,
+	width: "94%"
+}
+
+"#textAbstractLabel":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	top: 10,
+	width: "94%"
+}
+
 ".imageView":{
 	//image: "http://web.fe.infn.it/u/gambetti/venerdi/img/Bresadola.jpg",
 	width: "90%",
@@ -29,17 +49,24 @@
 	top: 10
 }
 
+".smallTitleLabel":{
+	color: '#900',
+	font: { fontSize:25 },
+	shadowColor: '#aaa',
+	shadowOffset: {x:5, y:5},
+	shadowRadius: 3,
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	top: 10
+}
+
+".titoloAbstractLabel":{
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
+}
+
 ".textContainer":{
 	backgroundColor: "#EAEFF2",
 	top: 5,
 	width: "100%"
-}
-
-"#textLabel":{
-	color: '#000',
-	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-	top: 10,
-	width: "94%"
 }
 
 ".button":{

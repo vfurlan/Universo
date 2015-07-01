@@ -1,6 +1,10 @@
 <Alloy>
 	<ScrollView id="eventoContent">
 		<View id="fotoView"></View>
-		<Label id="textLabel"></Label>
+		<Label id="titleCvLabel" class="smallTitleLabel">Breve Curriculum Vitae</Label>
+		<Label id="textCvLabel" class="textContainer"></Label>
+		<Label id="titleAbstractLabel" class="smallTitleLabel">Abstract</Label>
+		<Label id="textAbstractLabel" class="textContainer"></Label>
+		<Label id="titleMultimediaLabel" class="smallTitleLabel">Multimedia</Label>
 	</ScrollView>
 </Alloy>
