@@ -1,14 +1,6 @@
 var args = arguments[0] || {};
 
-function replace(str){
-	str = str.replace(/\|/g, "\n");
-	str = str.replace(/&/g, " ");
-	str = str.replace(/_/g, " ");
-	str = str.replace(/<br>/g, "\n");
-	str = str.replace(/<p>/g, "");
-	str = str.replace(/<\/p>/g, "");
-	return str;
-}
+var parser = require('parser');
 
 var data = new Date();
 var anno = data.getFullYear();
@@ -21,7 +13,7 @@ if(utenti.length>0){
 	for (var i = 0; i < utenti.length; i++) {
 		var relatore = utenti.at(i).get("relatore");
 		var id = utenti.at(i).get("id");
-		relatore = replace(relatore);
+		relatore = parser.replaceTag(relatore);
 		buttons[i] = Titanium.UI.createButton({title: relatore, titleid:id});
 		buttons[i].addEventListener('click', function(e) {
 			Ti.App.fireEvent("changeView", {
