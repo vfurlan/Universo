@@ -1,5 +1,9 @@
 <Alloy>
-	<View id="dove_siamo">
-		<Label>Dove siamo!</Label>
-	</View>
+	<ScrollView id="dove_siamoContent">
+		<Label id="titleDoveSiamoLabel" class="titleLabel">Dove siamo</Label>
+		<!--<View id="mapView"></View>-->
+		<View id="mapView" ns="Alloy.Globals.Map"></View>
+		<Label id="titleRecapitiLabel" class="smallTitleLabel">Recapiti</Label>
+		<Label id="textRecapitiLabel" class="textContainer"></Label>
+	</ScrollView>
 </Alloy>

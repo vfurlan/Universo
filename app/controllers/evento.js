@@ -41,7 +41,7 @@ if(utenti.length>0){
 		font: {fontSize:14, fontWeight:'bold'},
 		style: Titanium.UI.iPhone.ProgressBarStyle
 	});
-	$.eventoContent.add(ind);
+	$.multimediaView.add(ind);
 	
 	var xhr = Titanium.Network.createHTTPClient({
 		onload: function() {
@@ -80,7 +80,7 @@ if(utenti.length>0){
 	var content = "<div align='center'><iframe src='"+model.get("youtube")+"' frameborder='0' allowfullscreen></iframe></div>";
 	var video = Ti.UI.createWebView({html: content});
 	this.addClass(video,"youtubeView");
-	$.eventoContent.add(video);
+	$.multimediaView.add(video);
 	
 	
 	//Ti.Platform.openURL('http://www.youtube.com/embed/US7xaxyFETI?rel=0'); // use this to play the video

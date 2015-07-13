@@ -13,11 +13,7 @@
 	height: Ti.UI.SIZE
 }
 
-".youtubeView":{
-	layout: "vertical",
-	width: "100%",
-	height: Ti.UI.SIZE
-}
+"#titleCvLabel":{}
 
 "#textCvLabel":{
 	color: '#000',
@@ -26,11 +22,21 @@
 	width: "94%"
 }
 
+"#titleAbstractLabel":{}
+
 "#textAbstractLabel":{
 	color: '#000',
 	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
 	top: 10,
 	width: "94%"
+}
+
+"#titleMultimediaLabel":{}
+
+"#multimediaView":{
+	layout: "vertical",
+	width: "100%",
+	height: Ti.UI.SIZE
 }
 
 ".imageView":{
@@ -39,39 +45,13 @@
 	top: 10
 }
 
-".titleLabel":{
-	color: '#900',
-	font: { fontSize:40 },
-	shadowColor: '#aaa',
-	shadowOffset: {x:5, y:5},
-	shadowRadius: 3,
-	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-	top: 10
-}
-
-".smallTitleLabel":{
-	color: '#900',
-	font: { fontSize:25 },
-	shadowColor: '#aaa',
-	shadowOffset: {x:5, y:5},
-	shadowRadius: 3,
-	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-	top: 10
-}
-
 ".titoloAbstractLabel":{
 	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
 }
 
-".textContainer":{
-	backgroundColor: "#EAEFF2",
-	top: 5,
-	width: "100%"
+".youtubeView":{
+	layout: "vertical",
+	width: "100%",
+	height: "auto"
 }
 
-".button":{
-	backgroundColor: "#48515F",
-	top: 10,
-	width: "70%",
-	height: "10%"
-}
