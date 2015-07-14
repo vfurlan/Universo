@@ -11,9 +11,11 @@
 // Alloy.Globals.someGlobalFunction = function(){};
 
 Alloy.Globals.Map = require('ti.map');
- 
-Alloy.Globals.html_latitude = 44.8344902;
-Alloy.Globals.html_longitude = 11.5978999;
+
+Alloy.Globals.latitude = 44.836088;
+Alloy.Globals.longitude = 11.618724;
+Alloy.Globals.longitudeDelta = 0.001;
+Alloy.Globals.latitudeDelta = 0.001;
 
 if (OS_ANDROID) {
 	var rc = Alloy.Globals.Map.isGooglePlayServicesAvailable();

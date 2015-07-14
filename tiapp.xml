@@ -35,6 +35,9 @@
                 <false/>
                 <key>UIStatusBarStyle</key>
                 <string>UIStatusBarStyleDefault</string>
+                <key>NSLocationWhenInUseUsageDescription</key>
+                <string>
+                </string>
             </dict>
         </plist>
     </ios>
@@ -56,7 +59,7 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-        <module platform="iphone">ti.map</module>
+        <module platform="iphone" version="2.0.2">ti.map</module>
         <module platform="android">ti.map</module>
     </modules>
     <deployment-targets>

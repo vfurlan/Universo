@@ -26,6 +26,15 @@ $.mapView.add(map1);
 
 */
 
+var annotation = Alloy.Globals.Map.createAnnotation({
+    title : "Piazza del Municipio",
+    subtitle : "Piazza del Municipio, 44121 Ferrara",
+    latitude : Alloy.Globals.latitude,
+    longitude : Alloy.Globals.longitude,
+    url : "http://web.fe.infn.it/u/gambetti/venerdi/index.php"
+});
+$.mapView.addAnnotation(annotation);
+
 
 
 var recapiti= "I Venerdi Dell'Universo\n"+

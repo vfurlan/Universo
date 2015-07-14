@@ -10,15 +10,16 @@
 "#titleDoveSiamoLabel":{}
 
 "#titleRecapitiLabel":{}
+
 "#mapView": {
     userLocation: true,
     animate: true,
     top: 0,
-    region: { latitude: Alloy.Globals.html_latitude, latitudeDelta: 0.05, 
-       longitude: Alloy.Globals.html_longitude, longitudeDelta: 0.05 	},
+    region: { latitude: Alloy.Globals.latitude, latitudeDelta: Alloy.Globals.latitudeDelta, 
+       		longitude: Alloy.Globals.longitude, longitudeDelta: Alloy.Globals.longitudeDelta },
     layout: "vertical",
 	width: "100%",
-	height: Ti.UI.SIZE
+	height: "50%"
 }
 
 "#textRecapitiLabel":{
