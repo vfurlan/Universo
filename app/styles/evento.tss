@@ -39,6 +39,34 @@
 	height: Ti.UI.SIZE
 }
 
+"#pdfView":{
+	layout: "vertical",
+	width: "100%",
+	height: Ti.UI.SIZE
+}
+
+"#pdfButtonView":{
+	layout: "horizontal",
+	width: "100%",
+	height: Ti.UI.SIZE
+}
+
+".pdfButton":{
+	title: '',
+    backgroundImage : '/pdf.png',
+    height: '60',
+    width: '120',
+    top: '10',
+    //left: '10',
+}
+
+"#videoView":{
+	layout: "vertical",
+	width: "100%",
+	top: '10',
+	height: Ti.UI.SIZE
+}
+
 ".imageView":{
 	//image: "http://web.fe.infn.it/u/gambetti/venerdi/img/Bresadola.jpg",
 	width: "90%",

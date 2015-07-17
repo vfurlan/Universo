@@ -6,6 +6,11 @@
 		<Label id="titleAbstractLabel" class="smallTitleLabel">Abstract</Label>
 		<Label id="textAbstractLabel" class="textContainer"></Label>
 		<Label id="titleMultimediaLabel" class="smallTitleLabel">Multimedia</Label>
-		<View id="multimediaView"></View>
+		<View id="multimediaView">
+			<View id="pdfView">
+				<View id="pdfButtonView"></View>
+			</View>
+			<View id="videoView"></View>
+		</View>
 	</ScrollView>
 </Alloy>
