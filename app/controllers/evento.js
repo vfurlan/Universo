@@ -46,6 +46,7 @@ if(utenti.length>0){
 	for(var i=0;i<data.length;i++){
 		progressBarCount[i]=0;
 		button[i]=Titanium.UI.createButton();
+		button[i].setTitleid(i);
 		this.addClass(button[i],"pdfButton");
 		$.pdfButtonView.add(button[i]);
 	}
@@ -73,15 +74,15 @@ if(utenti.length>0){
 				dir=Ti.Filesystem.externalStorageDirectory;
 			else
 				dir=Ti.Filesystem.applicationDataDirectory;
-			var fileName=data[0].cognome+'.pdf';
+			var fileName=data[e.source.getTitleid()].cognome+'.pdf';
 			
 			file = Ti.Filesystem.getFile(dir,fileName);
 			if(file.exists()){
 				showPdf(file);
 			}
 			else{
-				if(progressBarCount[0]<1){
-					progressBarCount[0]=1;
+				if(progressBarCount[e.source.getTitleid()]<1){
+					progressBarCount[e.source.getTitleid()]=1;
 					$.pdfView.add(progressBar);
 					var xhr = Titanium.Network.createHTTPClient({
 						onload: function() {

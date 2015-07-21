@@ -47,7 +47,7 @@
 
 "#pdfButtonView":{
 	layout: "horizontal",
-	width: "100%",
+	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE
 }
 
