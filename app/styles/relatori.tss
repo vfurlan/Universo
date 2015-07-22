@@ -1,0 +1,8 @@
+
+"#relatoriContent": {
+	width: "94%",
+	showVerticalScrollIndicator: true,
+	height: Ti.UI.FILL,
+	layout: "vertical",
+	bottom: 10
+}

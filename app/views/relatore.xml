@@ -1,0 +1,11 @@
+<Alloy>
+	<View id="relatoreView">
+		<Label id="titleLabel" class="smallTitleLabel">Breve Curriculum Vitae</Label>
+		<Label id="textLabel" class="textContainer"></Label>
+		<View id="multimediaView">
+			<View id="pdfView">
+				<View id="pdfButtonView"></View>
+			</View>
+		</View>
+	</View>
+</Alloy>
