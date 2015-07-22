@@ -238,7 +238,7 @@ Ti.App.addEventListener("sliderToggled", function(e) {
 function rowSelect(e) {
 	if (currentView.id != e.row.customView) {
 		$.contentview.remove(currentView);
-		currentView = Alloy.createController(e.row.className,e.row.idRelatore).getView();
+		currentView = Alloy.createController(e.row.className,e.row.value).getView();
 		$.contentview.add(currentView);
 	}
 }
