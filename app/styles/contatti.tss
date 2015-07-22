@@ -1,4 +1,61 @@
 
-"#contatti": {
-  
+"#contattiContent": {
+	width: "94%",
+	showVerticalScrollIndicator: true,
+	height: Ti.UI.FILL,
+	layout: "vertical",
+	bottom: 10
+}
+
+"#titleOrganizzazioneLabel":{}
+
+"#titleInformazioniLabel":{}
+
+"#textOrganizzazioneLabel1":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	top: 10,
+	width: "94%"
+}
+
+"#textOrganizzazioneLabel2":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	top: 10,
+	width: "94%"
+}
+
+"#textOrganizzazioneLabel3":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	top: 10,
+	width: "94%"
+}
+
+"#textOrganizzazioneLabel4":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	top: 10,
+	width: "94%"
+}
+
+"#textInformazioniLabel1":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	top: 10,
+	width: "94%"
+}
+
+"#textInformazioniLabel2":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	top: 10,
+	width: "94%"
+}
+
+"#textInformazioniLabel3":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	top: 10,
+	width: "94%"
 }

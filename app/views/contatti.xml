@@ -1,5 +1,13 @@
 <Alloy>
-	<View id="contatti">
-		<Label>Contatti!</Label>
-	</View>
+	<ScrollView id="contattiContent">
+		<Label id="titleOrganizzazioneLabel" class="titleLabel">Organizzazione</Label>
+		<Label id="textOrganizzazioneLabel1" class="textContainer"></Label>
+		<Label id="textOrganizzazioneLabel2" class="textContainer"></Label>
+		<Label id="textOrganizzazioneLabel3" class="textContainer"></Label>
+		<Label id="textOrganizzazioneLabel4" class="textContainer"></Label>
+		<Label id="titleInformazioniLabel" class="titleLabel">Informazioni</Label>
+		<Label id="textInformazioniLabel1" class="textContainer"></Label>
+		<Label id="textInformazioniLabel2" class="textContainer"></Label>
+		<Label id="textInformazioniLabel3" class="textContainer"></Label>
+	</ScrollView>
 </Alloy>
