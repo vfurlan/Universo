@@ -1,6 +1,6 @@
 <Alloy>
 	<ScrollView id="programmaContent">
-		<Label id="titleLabel">Relatori</Label>
-		<Label id="textLabel"></Label>
+		<Label id="titleLabel" class="titleLabel">Relatori</Label>
+		<View id="buttonsView"></View>
 	</ScrollView>
 </Alloy>

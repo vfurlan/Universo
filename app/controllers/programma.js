@@ -2,11 +2,11 @@ var args = arguments[0] || {};
 
 var parser = require('parser');
 
-var data = new Date();
-var anno = data.getFullYear();
+var date = new Date();
+var currentYear = date.getFullYear();
 
 var utenti = Alloy.Collections.instance("utente");
-utenti.fetch({query: 'select * from utente where anno = '+anno });
+utenti.fetch({query: 'select * from utente where anno = '+currentYear });
 
 if(utenti.length>0){
 	var buttons = new Array();
@@ -20,13 +20,13 @@ if(utenti.length>0){
 				row : {
 					customView: "",
 					className: "evento",
-					idRelatore: e.source.titleid
+					value: e.source.titleid
 				}
 			});
 	    });
 	    this.addClass(buttons[i],"button");
 	
-		$.programmaContent.add(buttons[i]);
+		$.buttonsView.add(buttons[i]);
 	}
 }
 else{
