@@ -1,37 +1,16 @@
 
-"#edizioniPrecedenti": {
-	width: "94%",
-	height: Ti.UI.FILL
-}
-
 "#edizioniPrecedentiContent": {
-	layout: "vertical"
+	width: "94%",
+	showVerticalScrollIndicator: true,
+	height: Ti.UI.FILL,
+	layout: "vertical",
+	bottom: 10
 }
 
-"#imageView":{
-	image: "/venerdibanner_2015.png",
-	height: "13%",
-	top: 10
-}
+"#titleLabel":{}
 
-"#titleLabel":{
-	color: '#900',
-	font: { fontSize:40 },
-	shadowColor: '#aaa',
-	shadowOffset: {x:5, y:5},
-	shadowRadius: 3,
-	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-	top: 10
-}
-
-".textContainer":{
-	backgroundColor: "#EAEFF2",
-	top: 5,
-	width: "100%"
-}
-
-"#textLabel":{
-	color: '#000',
-	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-	width: "94%"
+"#buttonsView":{
+	layout: "vertical",
+	width: "100%",
+	height: Ti.UI.SIZE
 }

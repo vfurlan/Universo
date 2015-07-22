@@ -1,6 +1,6 @@
 <Alloy>
-	<ScrollView id="edizioniPrecedenti">
-		<View id="edizioniPrecedentiContent">
-		</View>
+	<ScrollView id="edizioniPrecedentiContent">
+		<Label id="titleLabel" class="titleLabel">Edizioni Precedenti</Label>
+		<View id="buttonsView"></View>
 	</ScrollView>
 </Alloy>
