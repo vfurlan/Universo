@@ -2,6 +2,8 @@ var args = arguments[0] || {};
 
 var parser = require('parser');
 
+var pdf = require('pdf');
+/*
 function showPdf(file){
 	if (Ti.Platform.osname === 'android'){
 		Ti.Android.currentActivity.startActivity(Ti.Android.createIntent({
@@ -14,7 +16,7 @@ function showPdf(file){
 		docViewer.show();
 	}
 }
-
+*/
 
 var utenti = Alloy.Collections.instance("utente");
 utenti.fetch({query: 'select * from utente where id = '+args });
@@ -78,12 +80,15 @@ if(utenti.length>0){
 			
 			file = Ti.Filesystem.getFile(dir,fileName);
 			if(file.exists()){
-				showPdf(file);
+				pdf.showPdf(file);
 			}
 			else{
 				if(progressBarCount[e.source.getTitleid()]<1){
 					progressBarCount[e.source.getTitleid()]=1;
 					$.pdfView.add(progressBar);
+					
+					pdf.saveAndShowPdf(dir,fileName,progressBar);
+					/*
 					var xhr = Titanium.Network.createHTTPClient({
 						onload: function() {
 							progressBar.message="Download complete!";
@@ -101,6 +106,7 @@ if(utenti.length>0){
 						progressBar.value = e.progress ;
 						Ti.API.info('ONDATASTREAM - PROGRESS: ' + e.progress);
 					};
+					*/
 				}
 			}
 			
