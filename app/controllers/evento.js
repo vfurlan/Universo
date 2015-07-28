@@ -3,20 +3,6 @@ var args = arguments[0] || {};
 var parser = require('parser');
 
 var pdf = require('pdf');
-/*
-function showPdf(file){
-	if (Ti.Platform.osname === 'android'){
-		Ti.Android.currentActivity.startActivity(Ti.Android.createIntent({
-			action:Ti.Android.ACTION_VIEW,
-			type:'application/pdf',
-			data:file.getNativePath()}));
-	}
-	else{
-		docViewer = Ti.UI.iOS.createDocumentViewer({url:file.getNativePath()});
-		docViewer.show();
-	}
-}
-*/
 
 var utenti = Alloy.Collections.instance("utente");
 utenti.fetch({query: 'select * from utente where id = '+args });
@@ -69,7 +55,6 @@ if(utenti.length>0){
 				style: Titanium.UI.iPhone.ProgressBarStyle
 			});
 			
-			
 			//inizializzazione del percorso assoluto e nome del file pdf
 			var dir;
 			if (Ti.Platform.osname === 'android')
@@ -87,33 +72,9 @@ if(utenti.length>0){
 					progressBarCount[e.source.getTitleid()]=1;
 					$.pdfView.add(progressBar);
 					
-					pdf.saveAndShowPdf(dir,fileName,progressBar);
-					/*
-					var xhr = Titanium.Network.createHTTPClient({
-						onload: function() {
-							progressBar.message="Download complete!";
-							
-							file = Ti.Filesystem.getFile(dir,fileName);
-							file.write(this.responseData); // write to the file
-							
-							showPdf(file);
-						},
-						timeout: 10000
-					});
-					xhr.open('GET','http://www.fe.infn.it/venerdi/VENERDIHOME_file/pdf'+model.get("anno")+'/'+fileName);
-					xhr.send();
-					xhr.ondatastream = function(e) {
-						progressBar.value = e.progress ;
-						Ti.API.info('ONDATASTREAM - PROGRESS: ' + e.progress);
-					};
-					*/
+					pdf.saveAndShowPdf(dir,fileName,model.get("anno"),progressBar);
 				}
 			}
-			
-			
-			
-			
-			
 		});
 	}
 	

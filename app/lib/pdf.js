@@ -20,7 +20,7 @@ exports.showPdf = function(file){
  * Funzione che scarica da internet il pdf indicato e lo salva in memoria
  * 
  * */
-exports.savePdf = function(dir,fileName,progressBar){
+exports.savePdf = function(dir,fileName,year,progressBar){
 	var xhr = Titanium.Network.createHTTPClient({
 		onload: function() {
 			progressBar.message="Download complete!";
@@ -30,7 +30,7 @@ exports.savePdf = function(dir,fileName,progressBar){
 		},
 		timeout: 10000
 	});
-	xhr.open('GET','http://www.fe.infn.it/venerdi/VENERDIHOME_file/pdf'+model.get("anno")+'/'+fileName);
+	xhr.open('GET','http://www.fe.infn.it/venerdi/VENERDIHOME_file/pdf'+year+'/'+fileName);
 	xhr.send();
 	xhr.ondatastream = function(e) {
 		progressBar.value = e.progress ;
@@ -43,22 +43,26 @@ exports.savePdf = function(dir,fileName,progressBar){
  * Funzione che scarica da internet il pdf indicato, lo salva in memoria ed infine lo apre
  * 
  * */
-exports.saveAndShowPdf = function(dir,fileName,progressBar){
+exports.saveAndShowPdf = function(dir,fileName,year,progressBar){
 	var xhr = Titanium.Network.createHTTPClient({
 		onload: function() {
-			progressBar.message="Download complete!";
+			progressBar.message="Download completato!";
 			
 			file = Ti.Filesystem.getFile(dir,fileName);
 			file.write(this.responseData); // write to the file
 			
-			showPdf(file);
+			exports.showPdf(file);
 		},
 		timeout: 10000
 	});
-	xhr.open('GET','http://www.fe.infn.it/venerdi/VENERDIHOME_file/pdf'+model.get("anno")+'/'+fileName);
+	xhr.open('GET','http://www.fe.infn.it/venerdi/VENERDIHOME_file/pdf'+year+'/'+fileName);
 	xhr.send();
 	xhr.ondatastream = function(e) {
 		progressBar.value = e.progress ;
 		Ti.API.info('ONDATASTREAM - PROGRESS: ' + e.progress);
+	};
+	xhr.onerror = function(e) {
+		progressBar.message="Download non completato!";
+		alert("PDF al momento non disponibile.");
 	};
 };
