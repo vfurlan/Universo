@@ -1,18 +1,4 @@
-//converti i pixels in dpi
-function pixelsToDp(pixels){
-    if ( Ti.Platform.displayCaps.dpi > 160 )
-        return (pixels / (Ti.Platform.displayCaps.dpi / 160));
-    else 
-        return pixels;
-}
-
-//converte i dpi in pixels
-function dpToPixels(dp){
-    if ( Ti.Platform.displayCaps.dpi > 160 )
-          return (dp * (Ti.Platform.displayCaps.dpi / 160));
-    else 
-        return dp;
-}
+var converter = require('converter');
 
 //imposto le dimensioni del menu
 var dimMonitor=Ti.Platform.displayCaps.dpi;
@@ -52,7 +38,7 @@ var direction = "reset";
 //rileva la posizione del dito quando si tocca lo schermo
 $.movableview.addEventListener('touchstart', function(e) {
 	if (Ti.Platform.osname === 'android'){
-		touchStartX = pixelsToDp(e.x);
+		touchStartX = converter.pixelsToDp(e.x);
 	}
 	else{
 		touchStartX = e.x;
@@ -95,7 +81,7 @@ $.movableview.addEventListener('touchmove', function(e) {
 	}, $.containerview);
 	var newLeft;
 	if (Ti.Platform.osname === 'android'){
-		newLeft = pixelsToDp(coords.x) - touchStartX;
+		newLeft = converter.pixelsToDp(coords.x) - touchStartX;
 	}
 	else{
 		newLeft = coords.x - touchStartX;
@@ -139,26 +125,6 @@ $.leftButton.addEventListener('touchend', function(e) {
 			else {
 				$.toggleLeftSlider();
 				$.toggleLeftSlider();
-			}
-		}
-	}
-});
-
-//gestisce l'apertura e chiusura del menu alla pressione del tasto di destra 'Menu2'
-$.rightButton.addEventListener('touchend', function(e) {
-	if (!touchRightStarted && !touchLeftStarted) {
-		if(buttonPressed==false){
-			buttonPressed = true;
-			$.toggleRightSlider();
-		}
-		else{
-			if(direction=="left"){
-				buttonPressed = false;
-				$.toggleLeftSlider();
-			}
-			else {
-				$.toggleRightSlider();
-				$.toggleRightSlider();
 			}
 		}
 	}
@@ -208,13 +174,6 @@ exports.handleRotation = function() {
 $.leftTableView.addEventListener('click', function selectRow(e) {
 	rowSelect(e);
 	$.toggleLeftSlider();
-	buttonPressed=false;
-});
-
-// Visualizza la vista selezionata nel menu di sinistra
-$.rightTableView.addEventListener('click', function selectRow(e) {
-	rowSelect(e);
-	$.toggleRightSlider();
 	buttonPressed=false;
 });
 
@@ -276,7 +235,7 @@ for(var i=0; i<titles.length; i++){
 
 // Pass data to widget leftTableView and rightTableView
 $.leftTableView.data = leftData;
-$.rightTableView.data = rightData;
+/*$.rightTableView.data = rightData;*/
 
 //apertura della vista 'nome_page' e impostazione come vista corrente
 var currentView = Alloy.createController("home_page").getView();
@@ -353,11 +312,6 @@ var client = Ti.Network.createHTTPClient({
 client.open("GET", url);
 // Send the request.
 client.send();
-
-//test
-//var utente = utenti.at(0);
-//alert(utente.get("anno"));
-
 
 
 
