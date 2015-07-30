@@ -5,6 +5,8 @@
 		<Label id="textCvLabel" class="textContainer"></Label>
 		<Label id="titleAbstractLabel" class="smallTitleLabel">Abstract</Label>
 		<Label id="textAbstractLabel" class="textContainer"></Label>
+		<Label id="titleDataLabel" class="smallTitleLabel">Data</Label>
+		<Label id="textDataLabel" class="textContainer"></Label>
 		<Label id="titleMultimediaLabel" class="smallTitleLabel">Multimedia</Label>
 		<View id="multimediaView">
 			<View id="pdfView">

@@ -26,6 +26,7 @@ if(utenti.length>0){
 	}
 	$.textCvLabel.text=parser.replaceTag(model.get("cv"));
 	$.textAbstractLabel.text=parser.replaceTag(model.get("abstract"));
+	$.textDataLabel.text=model.get("orario");
 	
 	
 	

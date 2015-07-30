@@ -31,6 +31,15 @@
 	width: "94%"
 }
 
+"#titleDataLabel":{}
+
+"#textDataLabel":{
+	color: '#000',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	top: 10,
+	width: "94%"
+}
+
 "#titleMultimediaLabel":{}
 
 "#multimediaView":{
