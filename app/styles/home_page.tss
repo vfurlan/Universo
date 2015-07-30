@@ -24,12 +24,6 @@
 	top: 10
 }
 
-".textContainer":{
-	backgroundColor: "#EAEFF2",
-	top: 5,
-	width: "100%"
-}
-
 "#textLabel":{
 	color: '#000',
 	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
