@@ -7,6 +7,7 @@ exports.replaceTag = function(str){
 	str = str.replace(/&/g, " ");
 	str = str.replace(/_/g, " ");
 	str = str.replace(/<br>/g, "\n");
+	str = str.replace(/<br \/>/g, "\n");
 	str = str.replace(/<p>/g, "");
 	str = str.replace(/<\/p>/g, "");
 	return str;
