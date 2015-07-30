@@ -5,6 +5,7 @@
 	zIndex: "2",
 	backgroundColor : "#48515F"
 },
+
 "#rightMenu": {
 	top: "10%",
 	right: "0",
@@ -12,16 +13,19 @@
 	zIndex: "1",
 	backgroundColor : "#48515F"
 },
+
 "#leftTableView": {
 	top: "1%",
 	width : "100%",
 	backgroundColor : "#48515F"
 },
+
 "#rightTableView": {
 	top: "1%",
 	width : "100%",
 	backgroundColor : "#48515F"
 },
+
 "#navview": {
 	top: "0",
 	left: "0",
@@ -30,12 +34,14 @@
 	zIndex: "3",
 	backgroundColor : '#4AA94A'
 },
+
 "#movableview": {
 	left: "0",
 	top: "10%",
 	zIndex: "3",
 	width : "100%"
 },
+
 "#contentview": {
 	left : "0",
 	width : "100%",
@@ -43,26 +49,22 @@
 	top : "0",
 	backgroundColor : 'white'
 },
+
 "#shadowview": {
 	shadowColor:"black",
     shadowOffset:{x:"0",y:"0"},
     shadowRadius:"2.5"
 },
+
 "#leftButton": {
 	backgroundImage : 'none',
 	//image : "/ButtonMenu.png",
-	left : "0",
+	left : "10",
 	top : "0",
 	style : "none",
 	title : "Menu"
 },
-"#rightButton": {
-	backgroundImage : 'none',
-	//image : "/ButtonMenu.png",
-	right : "0",
-	top : "0",
-	style : "none",
-	title : "Menu2"
-},
+
 ".win": {},
+
 "#containerview": {}
