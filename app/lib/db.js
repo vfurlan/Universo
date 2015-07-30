@@ -46,7 +46,6 @@ exports.saveDB = function() {
 			}
 			for(var i=0; i<myData.home.length;i++){
 				// Crea un modello di tipo 'home'
-				alert(myData.home[i].testo);
 				var model = Alloy.createModel('mission', {
 					anno: myData.home[i].anno,
 				    testo: myData.home[i].testo
@@ -58,7 +57,7 @@ exports.saveDB = function() {
 				// salva il modello
 				model.save();
 			}
-			alert("database caricato!");
+			//alert("database caricato!");
 	     },
 	     // function called when an error occurs, including a timeout
 	     onerror : function(e) {
