@@ -1,4 +1,23 @@
+//caricamento modulo per la conversione della risoluzione da pixels a dpi
 var converter = require('converter');
+
+
+/************************************************************************
+ * 																		*
+ * Gestione DB															*
+ *  																	*
+ ************************************************************************/
+
+//connessione al db remoto e salvataggio in quello locale
+var db = require('db');
+db.saveDB();
+
+
+/************************************************************************
+ * 																		*
+ * Gestione del menu e della visualizzazione delle viste				*
+ *  																	*
+ ************************************************************************/
 
 //imposto le dimensioni del menu
 var dimMonitor=Ti.Platform.displayCaps.dpi;
@@ -203,25 +222,14 @@ function rowSelect(e) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/************************************************************************
+ * 																		*
+ * Creazione del menu													*
+ *  																	*
+ ************************************************************************/
 
 //creazione del menu
 var leftData = [];
-var rightData = [];
 
 var titles=["Home Page","Programma","Edizioni Precedenti","Contatti","Dove siamo"];
 var classNames=["home_page","programma","edizioni_precedenti","contatti","dove_siamo"];
@@ -233,30 +241,19 @@ for(var i=0; i<titles.length; i++){
 	leftData.push(row);
 }
 
-// Pass data to widget leftTableView and rightTableView
+//passo i dati del menu al widget leftTableView
 $.leftTableView.data = leftData;
-/*$.rightTableView.data = rightData;*/
 
 //apertura della vista 'nome_page' e impostazione come vista corrente
 var currentView = Alloy.createController("home_page").getView();
 $.contentview.add(currentView);
 
 
-
-
-
-
-
-
-
-
-
-//connessione al db remoto e salvataggio in quello locale
-var db = require('db');
-db.saveDB();
-
-
-
+/************************************************************************
+ * 																		*
+ * Apertura applicazione												*
+ *  																	*
+ ************************************************************************/
 
 //apertura  dell'applicazione
 if (Ti.Platform.osname === 'iphone')

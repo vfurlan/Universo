@@ -1,9 +1,10 @@
 var args = arguments[0] || {};
 
+//caricamento dei moduli necessari
 var parser = require('parser');
-
 var pdf = require('pdf');
 
+//estraggo dal db i dati dell'utente indicato
 var utenti = Alloy.Collections.instance("utente");
 utenti.fetch({query: 'select * from utente where id = '+args });
 
@@ -64,6 +65,9 @@ if(utenti.length>0){
 				dir=Ti.Filesystem.applicationDataDirectory;
 			var fileName=data[e.source.getTitleid()].cognome+'.pdf';
 			
+			//controllo se esiste il file indicato:
+			//-se esiste semplicemente lo apro
+			//-se non esiste lo scarico, lo salvo in memoria e lo apro
 			file = Ti.Filesystem.getFile(dir,fileName);
 			if(file.exists()){
 				pdf.showPdf(file);
@@ -77,33 +81,15 @@ if(utenti.length>0){
 				}
 			}
 		});
-	}
+	}	
 	
-	
-	
-	
-	
+	//visualizzo il player embedded di youtube
 	//var content = "<div align='center'><iframe width='270' height='220' src='http://www.youtube.com/embed/JwowlWH0ZRk' frameborder='0' allowfullscreen></iframe></div>";
 	var content = "<div align='center'><iframe src='"+model.get("youtube")+"' frameborder='0' allowfullscreen></iframe></div>";
 	var video = Ti.UI.createWebView({html: content});
 	this.addClass(video,"youtubeView");
 	$.videoView.add(video);
 	
-	
-	
-	
-	/*
-	var youtubePlayer = require('titutorial.youtubeplayer');
-	var playVideo = Ti.UI.createButton({ title : 'Play video', height : '40dp', width : Ti.UI.SIZE, top : '100dp' }); 
-	$.multimediaView.add(playVideo);
-	playVideo.addEventListener('click', function() { youtubePlayer.playVideo("JwowlWH0ZRk"); });
-	*/
-	
-	
-	//Ti.Platform.openURL('http://www.youtube.com/embed/US7xaxyFETI?rel=0'); // use this to play the video
-	 
-	
-
 }
 else{
 	var title=Titanium.UI.createLabel();
