@@ -65,6 +65,15 @@
 	title : "Menu"
 },
 
-".win": {},
+"#rightButton": {
+	backgroundImage : 'none',
+	//image : "/ButtonMenu.png",
+	right : "10",
+	top : "0",
+	style : "none",
+	title : "Back"
+},
+
+"#win": {},
 
 "#containerview": {}

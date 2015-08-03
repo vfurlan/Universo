@@ -15,6 +15,34 @@ db.saveDB();
 
 /************************************************************************
  * 																		*
+ * Creazione del menu													*
+ *  																	*
+ ************************************************************************/
+
+//creazione del menu
+var leftData = [];
+
+var titles=["Home Page","Programma","Edizioni Precedenti","Contatti","Dove siamo"];
+var classNames=["home_page","programma","edizioni_precedenti","contatti","dove_siamo"];
+
+for(var i=0; i<titles.length; i++){
+	var row = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#3D4654",leftImage:"/bookmark-128.png",left:"5%"});
+	row.title=titles[i];
+	row.className=classNames[i];
+	leftData.push(row);
+}
+
+//passo i dati del menu al widget leftTableView
+$.leftTableView.data = leftData;
+
+//apertura della vista 'nome_page' e impostazione come vista corrente
+var currentView = Alloy.createController("home_page").getView();
+var nameCurrentView = "home_page";
+$.contentview.add(currentView);
+
+
+/************************************************************************
+ * 																		*
  * Gestione del menu e della visualizzazione delle viste				*
  *  																	*
  ************************************************************************/
@@ -39,17 +67,9 @@ var animateReset = Ti.UI.createAnimation({
 	duration : 300
 });
 
-//animazione per spostare il menu verso sinistra
-var animateLeft = Ti.UI.createAnimation({
-	left : -dimMenu,
-	curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
-	duration : 300
-});
-
 //imposto variabili per la gestione del menu
 var touchStartX = 0;
-var touchRightStarted = false;
-var touchLeftStarted = false;
+var touchSlideStarted = false;
 var buttonPressed = false;
 var hasSlided = false;
 var direction = "reset";
@@ -70,26 +90,17 @@ $.movableview.addEventListener('touchend', function(e) {
 		buttonPressed = false;
 		return;
 	}
-	if ($.movableview.left >= dimHalfMenu && touchRightStarted) {
+	if ($.movableview.left >= dimHalfMenu && touchSlideStarted) {
 		direction = "right";
 		$.movableview.animate(animateRight);
 		hasSlided = true;
 	}
-	else if ($.movableview.left <= -dimHalfMenu && touchLeftStarted) {
-		direction = "left";
-		$.movableview.animate(animateLeft);
-		hasSlided = true;
-	} else {
+	else {
 		direction = "reset";
 		$.movableview.animate(animateReset);
 		hasSlided = false;
 	}
-	Ti.App.fireEvent("sliderToggled", {
-		hasSlided : hasSlided,
-		direction : direction
-	});
-	touchRightStarted = false;
-	touchLeftStarted = false;
+	touchSlideStarted = false;
 });
 
 //gestice lo slide del menu mentre il dito non viene alzato dallo schermo
@@ -109,20 +120,9 @@ $.movableview.addEventListener('touchmove', function(e) {
 		if ((newLeft <= dimMenu && newLeft > 0) || 
 			(newLeft < 0 && newLeft >= -dimMenu)) {
 			$.movableview.left = newLeft;
-		
-			if (newLeft > 5 && !touchLeftStarted && !touchRightStarted) {
-				touchRightStarted = true;
-				Ti.App.fireEvent("sliderToggled", {
-					hasSlided : false,
-					direction : "right"
-				});
-			}
-			else if (newLeft < -5 && !touchRightStarted && !touchLeftStarted) {
-				touchLeftStarted = true;
-				Ti.App.fireEvent("sliderToggled", {
-					hasSlided : false,
-					direction : "left"
-				});
+			
+			if (newLeft > 5 && !touchSlideStarted) {
+				touchSlideStarted = true;
 			}
 		}
 	}
@@ -131,26 +131,22 @@ $.movableview.addEventListener('touchmove', function(e) {
 
 //gestisce l'apertura e chiusura del menu alla pressione del tasto di sinistra 'Menu'
 $.leftButton.addEventListener('touchend', function(e) {
-	if (!touchRightStarted && !touchLeftStarted) {
+	if (!touchSlideStarted) {
 		if(buttonPressed==false){
 			buttonPressed = true;
-			$.toggleLeftSlider();
+			$.toggleSlider();
 		}
 		else{
 			if(direction=="right"){
 				buttonPressed = false;
-				$.toggleRightSlider();
-			}
-			else {
-				$.toggleLeftSlider();
-				$.toggleLeftSlider();
+				$.toggleSlider();
 			}
 		}
 	}
 });
 
 //gestisce l'apertura verso destra e la chiusura del menu
-exports.toggleLeftSlider = function() {
+exports.toggleSlider = function() {
 	if (!hasSlided) {
 		direction = "right";
 		$.movableview.animate(animateRight);
@@ -160,27 +156,6 @@ exports.toggleLeftSlider = function() {
 		$.movableview.animate(animateReset);
 		hasSlided = false;
 	}
-	Ti.App.fireEvent("sliderToggled", {
-		hasSlided : hasSlided,
-		direction : direction
-	});
-};
-
-//gestisce l'apertura verso sinistra e la chiusura del menu
-exports.toggleRightSlider = function() {
-	if (!hasSlided) {
-		direction = "left";
-		$.movableview.animate(animateLeft);
-		hasSlided = true;
-	} else {
-		direction = "reset";
-		$.movableview.animate(animateReset);
-		hasSlided = false;
-	}
-	Ti.App.fireEvent("sliderToggled", {
-		hasSlided : hasSlided,
-		direction : direction
-    });
 };
 
 //gestisce la rotazione del telefono
@@ -192,7 +167,7 @@ exports.handleRotation = function() {
 // Visualizza la vista selezionata nel menu di sinistra
 $.leftTableView.addEventListener('click', function selectRow(e) {
 	rowSelect(e);
-	$.toggleLeftSlider();
+	$.toggleSlider();
 	buttonPressed=false;
 });
 
@@ -201,52 +176,63 @@ Ti.App.addEventListener('changeView', function selectRow(e) {
 	rowSelect(e);
 });
 
-//imposta quale menu viene visualizzato e quale nascosto sotto
-Ti.App.addEventListener("sliderToggled", function(e) {
-	if (e.direction == "right") {
-		$.leftMenu.zIndex = 2;
-		$.rightMenu.zIndex = 1;
-	} else if (e.direction == "left") {
-		$.leftMenu.zIndex = 1;
-		$.rightMenu.zIndex = 2;
-	}
-});
-
 //apre e sostituisce la vista corrente con quella selezionata dal menu
 function rowSelect(e) {
 	if (currentView.id != e.row.customView) {
 		$.contentview.remove(currentView);
 		currentView = Alloy.createController(e.row.className,e.row.value).getView();
+		nameCurrentView = e.row.className;
 		$.contentview.add(currentView);
 	}
 }
 
-
-/************************************************************************
- * 																		*
- * Creazione del menu													*
- *  																	*
- ************************************************************************/
-
-//creazione del menu
-var leftData = [];
-
-var titles=["Home Page","Programma","Edizioni Precedenti","Contatti","Dove siamo"];
-var classNames=["home_page","programma","edizioni_precedenti","contatti","dove_siamo"];
-
-for(var i=0; i<titles.length; i++){
-	var row = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#3D4654",leftImage:"/bookmark-128.png",left:"5%"});
-	row.title=titles[i];
-	row.className=classNames[i];
-	leftData.push(row);
+function comeBack() {
+	var className;
+	switch(nameCurrentView){
+		case "programma":
+			className = "home_page";
+			break;
+		case "edizioni_precedenti":
+			className = "home_page";
+			break;
+		case "contatti":
+			className = "home_page";
+			break;
+		case "dove_siamo":
+			className = "home_page";
+			break;
+		case "evento":
+			className = "programma";
+			break;
+		case "relatori":
+			className = "edizioni_precedenti";
+			break;
+		default:
+			if (Ti.Platform.osname === 'android')
+				$.win.close();
+			else
+				className = "apple";
+	}
+	
+	if (className != 'apple'){
+		Ti.App.fireEvent("changeView", {
+			row : {
+				customView: "",
+				className: className,
+				value: ""
+			}
+		});
+	}
 }
 
-//passo i dati del menu al widget leftTableView
-$.leftTableView.data = leftData;
+$.win.addEventListener('androidback', function(e) {
+	comeBack();
+});
 
-//apertura della vista 'nome_page' e impostazione come vista corrente
-var currentView = Alloy.createController("home_page").getView();
-$.contentview.add(currentView);
+$.rightButton.addEventListener('click', function(e) {
+	comeBack();
+});
+
 
 
 /************************************************************************
@@ -257,8 +243,8 @@ $.contentview.add(currentView);
 
 //apertura  dell'applicazione
 if (Ti.Platform.osname === 'iphone')
-	$.index.open({
+	$.win.open({
 		transition : Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
 	});
 else
-	$.index.open();
+	$.win.open();
