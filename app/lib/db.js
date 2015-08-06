@@ -5,21 +5,31 @@ home.fetch();
 
 var url= "http://valente666.altervista.com/web_service.php";
 
+/*
+ * Funzione che cancella il database
+ * 
+ * */
 exports.clearDB = function() {
+	//cancella la collection utente
 	while(utenti.length) { 
 	    utenti.at(0).destroy(); 
 	}
+	//cancella la collection mission
 	while(home.length) { 
 	    home.at(0).destroy(); 
 	}
 };
 
+/*
+ * Funzione che scarica e aggiorna il database
+ * 
+ * */
 exports.saveDB = function() {
 	var client = Ti.Network.createHTTPClient({
-	     // function called when the response data is available
 	     onload : function(e) {
 			Ti.API.info("Received text: " + this.responseText);
 			
+			//cancella il database
 			exports.clearDB();
 			
 			myData = JSON.parse(this.responseText);
@@ -38,7 +48,7 @@ exports.saveDB = function() {
 				    youtube: myData.utenti[i].youtube
 				});
 			
-				// aggiungi un modello alla collezione
+				// aggiunge un modello alla collezione
 				utenti.add(model);
 			
 				// salva il modello

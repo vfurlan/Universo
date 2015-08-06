@@ -11,6 +11,7 @@ utenti.fetch({query: 'select * from utente where id = '+args });
 if(utenti.length>0){
 	var model=utenti.at(0);
 	var data=parser.getData(model.get("relatore"));
+	//stampa nome, cognome, foto e titolo dell'abstract del/i relatore/i selezionato/i
 	for(var i=0;i<data.length;i++){
 		var title=Titanium.UI.createLabel();
 		var image=Titanium.UI.createImageView();
@@ -25,12 +26,12 @@ if(utenti.length>0){
 		$.fotoView.add(image);
 		$.fotoView.add(titolo_abstract);
 	}
+	//stampa CV, abstarct e orario dell'evento
 	$.textCvLabel.text=parser.replaceTag(model.get("cv"));
 	$.textAbstractLabel.text=parser.replaceTag(model.get("abstract"));
 	$.textDataLabel.text=model.get("orario");
 	
-	
-	
+	//inizializzazione dei contatori delle progress bar e dei bottoni per i pdf
 	var progressBarCount=new Array();
 	var button=new Array();
 	for(var i=0;i<data.length;i++){
@@ -41,6 +42,7 @@ if(utenti.length>0){
 		$.pdfButtonView.add(button[i]);
 	}
 	
+	//gestione dei pdf
 	for(var i=0;i<data.length;i++){
 		button[i].addEventListener('click',function(e){
 			//inizializzazione della progress bar relativa al download del pdf
@@ -76,46 +78,13 @@ if(utenti.length>0){
 				if(progressBarCount[e.source.getTitleid()]<1){
 					progressBarCount[e.source.getTitleid()]=1;
 					$.pdfView.add(progressBar);
-					
 					pdf.saveAndShowPdf(dir,fileName,model.get("anno"),progressBar);
 				}
 			}
 		});
 	}	
-	/*
-	//visualizzo il player embedded di youtube
-	//var content = "<div align='center'><iframe width='270' height='220' src='http://www.youtube.com/embed/JwowlWH0ZRk' frameborder='0' allowfullscreen></iframe></div>";
-	var content = "<div align='center'><iframe src='"+model.get("youtube")+"' frameborder='0' allowfullscreen></iframe></div>";
-	var video = Ti.UI.createWebView({html: content});
-	this.addClass(video,"youtubeView");
-	$.videoView.add(video);
-	*/
 	
-	
-	/*
-	
-	var videoPlayer = Titanium.Media.createVideoPlayer({
-	    top : 2,
-	    autoplay : true,
-	    backgroundColor : 'blue',
-	    height : 300,
-	    width : 300,
-	    mediaControlStyle : Titanium.Media.VIDEO_CONTROL_DEFAULT,
-	    scalingMode : Titanium.Media.VIDEO_SCALING_ASPECT_FIT
-	});*/
-	/*
-	videoPlayer.url = 'https://www.googleapis.com/youtube/v3/videos?id=JwowlWH0ZRk&key=AIzaSyAdgNyw89N_vM1_H5YOYpOGQIY5sDnm2TI&part=snippet,contentDetails,statistics,status';
-	*//*$.videoView.add(videoPlayer);
-	
-	
-	var Get_MP4 = require('youtube');
-	 
-	YouTubeID = 'JwowlWH0ZRk';
-	new Get_MP4(YouTubeID, function(_url) {
-	    videoPlayer.url = _url;
-	});
-	
-	*/
+	//se e' presente una connessione ad internet incorpora un player di youtube con il video dell'evento
 	if(!Titanium.Network.networkType == Titanium.Network.NETWORK_NONE){
 		var content = "<div align='center'><iframe src='"+model.get("youtube")+"' frameborder='0' allowfullscreen></iframe></div>";
 		var webView = Ti.UI.createWebView({
@@ -127,14 +96,11 @@ if(utenti.length>0){
 		    showScrollbars: false,
 		    width: "100%"
 		});
-		
 		$.videoView.add(webView);
 	}
- 
-	
-	
 }
 else{
+	//dati non disponibili
 	var title=Titanium.UI.createLabel();
 	var titolo_abstract=Titanium.UI.createLabel();
 	this.addClass(title,"titleLabel");

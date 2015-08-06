@@ -186,6 +186,7 @@ function rowSelect(e) {
 	}
 }
 
+//indica quale vista da sostituire alla pressione del tasto (o bottone) back
 function comeBack() {
 	var className;
 	switch(nameCurrentView){
@@ -211,9 +212,12 @@ function comeBack() {
 			if (Ti.Platform.osname === 'android')
 				$.win.close();
 			else
+				//apple non permette di chiudere le app e quindi si imposta
+				//un className particolare invece di chiudere l'app
 				className = "apple";
 	}
 	
+	//spara un'evento indicando la vista da caricare
 	if (className != 'apple'){
 		Ti.App.fireEvent("changeView", {
 			row : {
@@ -225,10 +229,12 @@ function comeBack() {
 	}
 }
 
+//chiama la funzione comeBack alla pressione del tasto back
 $.win.addEventListener('androidback', function(e) {
 	comeBack();
 });
 
+//chiama la funzione comeBack alla pressione del bottone back
 $.rightButton.addEventListener('click', function(e) {
 	comeBack();
 });

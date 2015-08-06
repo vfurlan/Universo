@@ -1,6 +1,12 @@
 var args = arguments[0] || {};
 
 
+/************************************************************************
+ * 																		*
+ * Dati delle organizzazioni											*
+ *  																	*
+ ************************************************************************/
+
 var organizzazione1= "Curatore Responsabile Prof. Mauro Savrie'\n"+
 "Email: savrie@fe.infn.it\n"+
 "Telefono: 0532974268";
@@ -22,6 +28,12 @@ $.textOrganizzazioneLabel2.text=organizzazione2;
 $.textOrganizzazioneLabel3.text=organizzazione3;
 $.textOrganizzazioneLabel4.text=organizzazione4;
 
+
+/************************************************************************
+ * 																		*
+ * Dati dei dipartimenti												*
+ *  																	*
+ ************************************************************************/
 
 var informazioni1= "Dipartimento di Fisica e Scienze della Terra\n"+
 "Via G. Saragat, 1 - Blocco C - 44122 Ferrara\n"+
