@@ -26,6 +26,10 @@ if(utenti.length>0){
 	}
 }
 else{
-	$.textLabel.text="Nessuna edizione precedente!";
+	var textLabel = Titanium.UI.createLabel();
+	this.addClass(textLabel,"textContainer");
+	textLabel.text = "Nessuna edizione precedente!";
+	textLabel.textAlign = Ti.UI.TEXT_ALIGNMENT_CENTER;
+	$.buttonsView.add(textLabel);
 }
 

@@ -82,13 +82,56 @@ if(utenti.length>0){
 			}
 		});
 	}	
-	
+	/*
 	//visualizzo il player embedded di youtube
 	//var content = "<div align='center'><iframe width='270' height='220' src='http://www.youtube.com/embed/JwowlWH0ZRk' frameborder='0' allowfullscreen></iframe></div>";
 	var content = "<div align='center'><iframe src='"+model.get("youtube")+"' frameborder='0' allowfullscreen></iframe></div>";
 	var video = Ti.UI.createWebView({html: content});
 	this.addClass(video,"youtubeView");
 	$.videoView.add(video);
+	*/
+	
+	
+	/*
+	
+	var videoPlayer = Titanium.Media.createVideoPlayer({
+	    top : 2,
+	    autoplay : true,
+	    backgroundColor : 'blue',
+	    height : 300,
+	    width : 300,
+	    mediaControlStyle : Titanium.Media.VIDEO_CONTROL_DEFAULT,
+	    scalingMode : Titanium.Media.VIDEO_SCALING_ASPECT_FIT
+	});*/
+	/*
+	videoPlayer.url = 'https://www.googleapis.com/youtube/v3/videos?id=JwowlWH0ZRk&key=AIzaSyAdgNyw89N_vM1_H5YOYpOGQIY5sDnm2TI&part=snippet,contentDetails,statistics,status';
+	*//*$.videoView.add(videoPlayer);
+	
+	
+	var Get_MP4 = require('youtube');
+	 
+	YouTubeID = 'JwowlWH0ZRk';
+	new Get_MP4(YouTubeID, function(_url) {
+	    videoPlayer.url = _url;
+	});
+	
+	*/
+	if(!Titanium.Network.networkType == Titanium.Network.NETWORK_NONE){
+		var content = "<div align='center'><iframe src='"+model.get("youtube")+"' frameborder='0' allowfullscreen></iframe></div>";
+		var webView = Ti.UI.createWebView({
+		    //url: 'https://www.youtube.com/watch?v=JwowlWH0ZRk&autohide=0&autoplay=0&controls=2&enablejsapi=1&showinfo=0',
+		    html: content,
+		    enableZoomControls: false,
+		    scalesPageToFit: false,
+		    scrollsToTop: false,
+		    showScrollbars: false,
+		    width: "100%"
+		});
+		
+		$.videoView.add(webView);
+	}
+ 
+	
 	
 }
 else{

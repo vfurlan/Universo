@@ -30,6 +30,10 @@ if(utenti.length>0){
 	}
 }
 else{
-	$.textLabel.text="Nessun evento disponibile!";
+	var textLabel = Titanium.UI.createLabel();
+	this.addClass(textLabel,"textContainer");
+	textLabel.text = "Nessun evento disponibile!";
+	textLabel.textAlign = Ti.UI.TEXT_ALIGNMENT_CENTER;
+	$.buttonsView.add(textLabel);
 }
 

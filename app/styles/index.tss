@@ -74,6 +74,8 @@
 	title : "Back"
 },
 
-"#win": {},
+"#win": {
+	exitOnClose : true
+},
 
 "#containerview": {}
