@@ -52,13 +52,13 @@ var classNames=["home_page","programma","edizioni_precedenti","contatti","dove_s
 for(var i=0; i<titles.length; i++){
 	var row = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#3D4654",left:"5%"});
 	if (dimMonitor <= 160){
-		row.leftImage="/bookmark-32.png";
+		row.leftImage="/images/"+classNames[i]+"-32.png";
 	}
 	else if (dimMonitor <= 320){
-		row.leftImage="/bookmark-64.png";
+		row.leftImage="/images/"+classNames[i]+"-64.png";
 	}
 	else {
-		row.leftImage="/bookmark-128.png";
+		row.leftImage="/images/"+classNames[i]+"-128.png";
 	}
 	row.title=titles[i];
 	row.className=classNames[i];
