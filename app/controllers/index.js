@@ -15,6 +15,30 @@ db.saveDB();
 
 /************************************************************************
  * 																		*
+ * Dimensioni del menu 													*
+ *  																	*
+ ************************************************************************/
+
+//imposto le dimensioni del menu
+var dimMonitor,dimMenu;
+if (Ti.Platform.osname === 'android'){
+	dimMonitor = converter.pixelsToDp(Ti.Platform.displayCaps.platformWidth);
+}
+else{
+	dimMonitor=Ti.Platform.displayCaps.platformWidth;
+}
+if (dimMonitor > 350) {
+	dimMenu=250;
+}
+else{
+	dimMenu=dimMonitor*0.7;
+}
+var dimHalfMenu=dimMenu*0.5;
+var minDimMenu=dimMonitor*0.1;
+
+
+/************************************************************************
+ * 																		*
  * Creazione del menu													*
  *  																	*
  ************************************************************************/
@@ -26,7 +50,16 @@ var titles=["Home Page","Programma","Edizioni Precedenti","Contatti","Dove siamo
 var classNames=["home_page","programma","edizioni_precedenti","contatti","dove_siamo"];
 
 for(var i=0; i<titles.length; i++){
-	var row = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#3D4654",leftImage:"/bookmark-128.png",left:"5%"});
+	var row = Titanium.UI.createTableViewRow({height:"50",width:"100%",backgroundColor:"#3D4654",left:"5%"});
+	if (dimMonitor <= 160){
+		row.leftImage="/bookmark-32.png";
+	}
+	else if (dimMonitor <= 320){
+		row.leftImage="/bookmark-64.png";
+	}
+	else {
+		row.leftImage="/bookmark-128.png";
+	}
 	row.title=titles[i];
 	row.className=classNames[i];
 	leftData.push(row);
@@ -47,24 +80,18 @@ $.contentview.add(currentView);
  *  																	*
  ************************************************************************/
 
-//imposto le dimensioni del menu
-var dimMonitor=Ti.Platform.displayCaps.dpi;
-var dimMenu=dimMonitor*0.7;
-var dimHalfMenu=dimMonitor*0.35;
-var minDimMenu=dimMonitor*0.1;
-
 //animazione per spostare il menu verso destra
 var animateRight = Ti.UI.createAnimation({
 	left : dimMenu,
-	curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
-	duration : 300
+	//curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
+	duration : 200
 });
 
 //animazione per chiudere il menu
 var animateReset = Ti.UI.createAnimation({
 	left : 0,
-	curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
-	duration : 300
+	//curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
+	duration : 200
 });
 
 //imposto variabili per la gestione del menu
@@ -248,7 +275,7 @@ $.rightButton.addEventListener('click', function(e) {
  ************************************************************************/
 
 //apertura  dell'applicazione
-if (Ti.Platform.osname === 'iphone')
+if (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad')
 	$.win.open({
 		transition : Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
 	});

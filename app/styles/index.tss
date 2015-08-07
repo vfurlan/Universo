@@ -6,24 +6,11 @@
 	backgroundColor : "#48515F"
 },
 
-"#rightMenu": {
-	top: "10%",
-	right: "0",
-	width: "70%",
-	zIndex: "1",
-	backgroundColor : "#48515F"
-},
-
 "#leftTableView": {
 	top: "1%",
 	width : "100%",
-	backgroundColor : "#48515F"
-},
-
-"#rightTableView": {
-	top: "1%",
-	width : "100%",
-	backgroundColor : "#48515F"
+	backgroundColor : "#48515F",
+	separatorColor : "#48515F"
 },
 
 "#navview": {
@@ -60,7 +47,6 @@
 	backgroundImage : 'none',
 	//image : "/ButtonMenu.png",
 	left : "10",
-	top : "0",
 	style : "none",
 	title : "Menu"
 },
@@ -69,7 +55,6 @@
 	backgroundImage : 'none',
 	//image : "/ButtonMenu.png",
 	right : "10",
-	top : "0",
 	style : "none",
 	title : "Back"
 },
