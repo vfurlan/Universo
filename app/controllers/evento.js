@@ -2,6 +2,7 @@ var args = arguments[0] || {};
 
 //caricamento dei moduli necessari
 var parser = require('parser');
+var image = require('image');
 var pdf = require('pdf');
 
 //estraggo dal db i dati dell'utente indicato
@@ -14,16 +15,30 @@ if(utenti.length>0){
 	//stampa nome, cognome, foto e titolo dell'abstract del/i relatore/i selezionato/i
 	for(var i=0;i<data.length;i++){
 		var title=Titanium.UI.createLabel();
-		var image=Titanium.UI.createImageView();
+		var img=Titanium.UI.createImageView();
 		var titolo_abstract=Titanium.UI.createLabel();
 		this.addClass(title,"titleLabel");
-		this.addClass(image,"imageView");
+		this.addClass(img,"imageView");
 		this.addClass(titolo_abstract,"titoloAbstractLabel");
 		title.text=data[i].nome+" "+data[i].cognome;
-		image.image="http://web.fe.infn.it/u/gambetti/venerdi/img/"+parser.getStringNoSpace(data[i].cognome)+".jpg";
+		
+		//controllo se esiste l'immagine indicata:
+		//-se esiste semplicemente la apre
+		//-se non esiste la scarica, la salva in memoria e la apre
+		var dir=Ti.Filesystem.applicationDataDirectory;
+		var fileName=parser.getStringNoSpace(data[i].cognome)+".jpg";
+		file = Ti.Filesystem.getFile(dir,fileName);
+			if(file.exists()){
+				img.image=dir+"/"+fileName;
+			}
+			else{
+				image.saveImage(dir,fileName,img);
+			}
+		
+		//img.image="http://web.fe.infn.it/u/gambetti/venerdi/img/"+parser.getStringNoSpace(data[i].cognome)+".jpg";
 		titolo_abstract.text=model.get("titolo_abstract");
 		$.fotoView.add(title);
-		$.fotoView.add(image);
+		$.fotoView.add(img);
 		$.fotoView.add(titolo_abstract);
 	}
 	//stampa CV, abstarct e orario dell'evento
